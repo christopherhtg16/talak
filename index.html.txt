@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Latihan Numerasi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+    .soal {
+      margin-bottom: 20px;
+    }
+    .jawaban {
+      margin: 5px 0;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #skor, #timer {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+    }
+    .pembuat {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+    .pembuat img {
+      width: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Latihan Numerasi</h1>
+
+    <label>Nama Siswa</label>
+    <input type="text" id="nama" placeholder="Masukkan nama Anda">
+
+    <label>Asal Sekolah</label>
+    <input type="text" id="sekolah" placeholder="Masukkan asal sekolah Anda">
+
+    <div id="timer">Waktu tersisa: 05:00</div>
+
+    <form id="kuis">
+      <!-- Soal 1 -->
+      <div class="soal">
+        <p><strong>1. 5 × 6 + 2 = ...</strong></p>
+        <div class="jawaban"><label><input type="radio" name="q1" value="a"> 32</label></div>
+        <div class="jawaban"><label><input type="radio" name="q1" value="b"> 30</label></div>
+        <div class="jawaban"><label><input type="radio" name="q1" value="c"> 28</label></div>
+        <div class="jawaban"><label><input type="radio" name="q1" value="d"> 34</label></div>
+      </div>
+
+      <!-- 9 soal tambahan bisa Anda tambahkan nanti dengan pola serupa -->
+      <!-- Untuk demo, hanya 1 soal dulu -->
+
+      <button type="button" onclick="cekKuis()">Lihat Skor</button>
+    </form>
+
+    <div id="skor"></div>
+
+    <div class="pembuat">
+      <img src="https://via.placeholder.com/80" alt="Foto Pembuat">
+      <p><strong>Christopher Hutagalung, S.Pd</strong><br>Pembuat</p>
+    </div>
+  </div>
+
+  <script>
+    // Timer 5 menit (300 detik)
+    let waktu = 300;
+    let timer = setInterval(function() {
+      let menit = Math.floor(waktu / 60);
+      let detik = waktu % 60;
+      document.getElementById("timer").textContent = `Waktu tersisa: ${menit.toString().padStart(2, '0')}:${detik.toString().padStart(2, '0')}`;
+      if (waktu === 0) {
+        clearInterval(timer);
+        cekKuis();
+      }
+      waktu--;
+    }, 1000);
+
+    function cekKuis() {
+      clearInterval(timer); // stop timer
+      const nama = document.getElementById("nama").value.trim();
+      const sekolah = document.getElementById("sekolah").value.trim();
+      const skorEl = document.getElementById("skor");
+
+      if (!nama || !sekolah) {
+        skorEl.textContent = "Nama dan asal sekolah harus diisi!";
+        skorEl.style.color = "red";
+        return;
+      }
+
+      let skor = 0;
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      if (q1 && q1.value === 'a') skor++; // Jawaban benar: 5×6+2 = 32
+
+      skorEl.style.color = "green";
+      skorEl.innerHTML = `
+        Terima kasih, <strong>${nama}</strong> dari <strong>${sekolah}</strong>.<br>
+        Skor Anda: <strong>${skor}</strong> dari 10 soal.
+      `;
+    }
+  </script>
+</body>
+</html>
