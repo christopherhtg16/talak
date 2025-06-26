@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Latihan Numerasi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .soal {
+      margin-bottom: 20px;
+    }
+    .jawaban {
+      margin: 5px 0;
+    }
+    .btn {
+      background-color: #2980b9;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .hasil {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Latihan Numerasi</h1>
+
+  <div class="soal">
+    <p><strong>1. Ibu membeli 3 kg apel dan 2 kg jeruk. Harga 1 kg apel Rp20.000 dan 1 kg jeruk Rp15.000. Berapa total uang yang dibayarkan Ibu?</strong></p>
+    <div class="jawaban"><input type="radio" name="q1" value="a"> Rp80.000</div>
+    <div class="jawaban"><input type="radio" name="q1" value="b"> Rp90.000</div>
+    <div class="jawaban"><input type="radio" name="q1" value="c"> Rp95.000</div>
+    <div class="jawaban"><input type="radio" name="q1" value="d"> Rp100.000</div>
+  </div>
+
+  <button class="btn" onclick="cekJawaban()">Cek Jawaban</button>
+
+  <div class="hasil" id="hasil"></div>
+
+  <script>
+    function cekJawaban() {
+      const jawaban = document.querySelector('input[name="q1"]:checked');
+      const hasil = document.getElementById("hasil");
+      if (!jawaban) {
+        hasil.textContent = "Silakan pilih salah satu jawaban!";
+        hasil.style.color = "red";
+        return;
+      }
+
+      if (jawaban.value === "b") {
+        hasil.textContent = "Benar! Total = (3×20.000) + (2×15.000) = Rp90.000";
+        hasil.style.color = "green";
+      } else {
+        hasil.textContent = "Salah. Coba lagi ya!";
+        hasil.style.color = "red";
+      }
+    }
+  </script>
+
+</body>
+</html>
